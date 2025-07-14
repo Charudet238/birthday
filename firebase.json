@@ -1,0 +1,11 @@
+{
+  "hosting": {
+    "source": ".next",
+    "rewrites": [
+      {
+        "source": "**",
+        "function": "nextApp"
+      }
+    ]
+  }
+}
