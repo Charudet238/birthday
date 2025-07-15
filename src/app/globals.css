@@ -33,3 +33,25 @@ body {
   @apply text-black bg-white;
 }
 
+/* ─── Global Styles ───────────────────────────────────────────────────────── */
+/* any other global styles */
+
+/* ─── Pixel‐art Styles ──────────────────────────────────────────────────────── */
+.pixel-balloon,
+.pixel-heart {
+  position: absolute;
+  bottom: -60px;
+}
+
+/* custom Tailwind-compatible animation class */
+.animate-rise {
+  animation-name: rise;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-out;
+}
+
+@keyframes rise {
+  0%   { transform: translateY(0) scale(0.5); opacity: 0; }
+  10%  { opacity: 1; }
+  100% { transform: translateY(-120vh) scale(1); opacity: 1; }
+}
