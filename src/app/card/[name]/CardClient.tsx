@@ -4,7 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import balloon from "@/assets/pixel-balloon.png";
-import heart   from "@/assets/pixel-heart.png";
+import heart from "@/assets/pixel-heart.png";
 
 type RiseConfig = {
   left: string; // ตำแหน่งซ้ายเป็น %
@@ -91,11 +91,12 @@ export default function EnvelopeCard({ name }: { name: string }) {
 
   // Cleanup เมื่อ unmount
   useEffect(() => {
+    // จับค่า ref ปัจจุบันไว้ในตัวแปร
+    const audioEl = bgAudioRef.current;
     return () => {
-      const bg = bgAudioRef.current;
-      if (bg) {
-        bg.pause();
-        bg.currentTime = 0;
+      if (audioEl) {
+        audioEl.pause();
+        audioEl.currentTime = 0;
       }
     };
   }, []);
