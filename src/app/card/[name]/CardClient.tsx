@@ -23,6 +23,23 @@ export default function EnvelopeCard({ name }: { name: string }) {
   const audioRef = useRef<HTMLAudioElement>(null);
   const bgAudioRef = useRef<HTMLAudioElement>(null);
 
+  // Variants สำหรับซอง
+  // const envelopeBounce = {
+  //   idle: { y: [0, -10, 0] },
+  //   bounce: {
+  //     y: [0, -10, 0],
+  //     transition: { repeat: Infinity, duration: 0.8, ease: "easeInOut", repeatDelay: 0.2 },
+  //   },
+  // };
+  // const envelopeEnter = {
+  //   hidden: { scale: 0.8, opacity: 0 },
+  //   visible: { scale: 1, opacity: 1, transition: { duration: 0.6, ease: "easeOut" } },
+  // };
+  // const lidVariants = {
+  //   closed: { rotateX: 0 },
+  //   open:   { rotateX: -180, transition: { duration: 0.6, ease: "easeInOut" } },
+  // };
+
   // สุ่ม config สำหรับลูกโป่ง
   useEffect(() => {
     const count = 12,
@@ -149,7 +166,8 @@ export default function EnvelopeCard({ name }: { name: string }) {
                 animationName: "rise",
                 animationDuration: `${duration}s`,
                 animationTimingFunction: "ease-out",
-                animationFillMode: "forwards",
+                animationFillMode: "both",
+                // animationFillMode: "forwards",
                 animationDelay: `${delay}s`,
               }}
               unoptimized={false} // ให้ Next.js ปรับขนาด/แปลงภาพอัตโนมัติ
@@ -172,7 +190,8 @@ export default function EnvelopeCard({ name }: { name: string }) {
                 animationName: "rise",
                 animationDuration: `${duration}s`,
                 animationTimingFunction: "ease-out",
-                animationFillMode: "forwards",
+                // animationFillMode: "forwards",
+                animationFillMode: "both",
                 animationDelay: `${delay}s`,
               }}
               unoptimized={false}
@@ -192,15 +211,12 @@ export default function EnvelopeCard({ name }: { name: string }) {
             transition={{ duration: 0.8 }}
             className="relative w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg aspect-[4/3]"
           >
-            {/* หลังซอง */}
             <motion.div
               initial={{ y: 40, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.3, duration: 0.6 }}
               className="absolute inset-0 bg-red-300 rounded-md shadow-xl z-0"
             />
-
-            {/* ฝาซอง */}
             <motion.div
               layout
               onClick={() => setOpen((o) => !o)}
@@ -210,6 +226,14 @@ export default function EnvelopeCard({ name }: { name: string }) {
               className="absolute top-0 left-1/2 -translate-x-1/2 w-[90%] sm:w-11/12 h-[60%] bg-white rounded-md p-4 z-10 cursor-pointer shadow-md"
               style={{ y: open ? -160 : 0 }}
             >
+              {/* Prompt inside white flap */}
+              {!open && (
+                <div className="flex items-center justify-center h-full">
+                  <p className="text-gray-700 text-sm">
+                    กดที่จดหมายเพื่ออ่านครับ
+                  </p>
+                </div>
+              )}
               <AnimatePresence>
                 {open && (
                   <motion.ul

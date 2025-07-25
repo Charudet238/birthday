@@ -46,7 +46,8 @@ body {
 /* custom Tailwind-compatible animation class */
 .animate-rise {
   animation-name: rise;
-  animation-fill-mode: forwards;
+  /* animation-fill-mode: forwards; */
+  animation-fill-mode: both; 
   animation-timing-function: ease-out;
 }
 
